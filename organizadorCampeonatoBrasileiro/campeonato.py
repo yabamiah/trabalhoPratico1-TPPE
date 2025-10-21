@@ -11,32 +11,44 @@ class Campeonato:
             raise ValueError("O campeonato deve ter 20 equipes")
 
     def gerar_rodadas(self):
-        """Gera as rodadas do campeonato."""
+        """Gera as rodadas do campeonato usando o algoritmo Round-Robin.
+        
+        Implementa um algoritmo Round-Robin que garante que:
+        - Cada time jogue contra todos os outros exatamente duas vezes (turno e returno)
+        - Cada confronto A vs B ocorra exatamente uma vez
+        - Cada time jogue 19 partidas como mandante e 19 como visitante
+        - Total de 38 rodadas com 10 partidas cada
+        """
 
         self.jogos = []
+        # Cria uma cópia da lista de equipes para não modificar a original
+        equipes_trabalho = self.equipes.copy()
         metade_campeonato = self.num_times // 2
 
-        # PrimeiroTurno
-        for r in range(self.num_times - 1):
+        # Primeiro Turno (19 rodadas)
+        for rodada_num in range(self.num_times - 1):
             jogos_rodada = []
+            
             for i in range(metade_campeonato):
-                a = self.equipes[i]
-                b = self.equipes[self.num_times - 1 - i]
+                time_a = equipes_trabalho[i]
+                time_b = equipes_trabalho[self.num_times - 1 - i]
 
-                # alterna mandos por rodada 
-                if r % 2 == 0:
-                    jogos_rodada.append((a, b))
+                # Alterna mandos por rodada para equilibrar casa/fora
+                if rodada_num % 2 == 0:
+                    jogos_rodada.append((time_a, time_b))
                 else:
-                    jogos_rodada.append((b, a))
+                    jogos_rodada.append((time_b, time_a))
+            
             self.jogos.append(jogos_rodada)
 
-            # Rotaciona mantendo o primeiro fixo
-            self.equipes = [self.equipes[0], self.equipes[-1]] + self.equipes[1:-1]
+            # Rotaciona os times mantendo o primeiro fixo (algoritmo Round-Robin)
+            equipes_trabalho = [equipes_trabalho[0], equipes_trabalho[-1]] + equipes_trabalho[1:-1]
 
-        # Returno (invertendo mandos)
-        turno = list(self.jogos)
-        for rodada in turno:
-            self.jogos.append([(visitante, mandante) for mandante, visitante in rodada])
+        # Returno (19 rodadas) - inverte todos os mandos do turno
+        primeiro_turno = list(self.jogos)
+        for rodada in primeiro_turno:
+            rodada_returno = [(visitante, mandante) for mandante, visitante in rodada]
+            self.jogos.append(rodada_returno)
         
     def exibir_jogos(self):
         """Imprime o calendário de jogos gerado."""
