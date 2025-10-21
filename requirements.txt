@@ -1,0 +1,13 @@
+# Dependências para o projeto do Campeonato Brasileiro
+# Trabalho Prático 1 - TPPE
+
+# Dependências para testes
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Dependências para cobertura de código
+codecov>=2.1.0
+coverage>=6.0.0
+
+# Dependências básicas do Python (caso necessário)
+# O projeto usa apenas bibliotecas padrão do Python, mas deixamos essas aqui caso seja necessário
