@@ -5,6 +5,13 @@ import os
 # Adiciona o diretório raiz do projeto ao Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
+import unittest
+import sys
+import os
+
+# Adiciona o diretório raiz do projeto ao Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+
 from organizadorCampeonatoBrasileiro.time import Time
 
 
