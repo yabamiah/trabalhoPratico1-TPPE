@@ -6,6 +6,7 @@ from tests import test_partida
 from tests import test_processamento_resultados
 from tests import test_time
 from tests import test_integracao_campeonato
+from tests import test_refatoracao_processador
 
 def suite():
     suite = unittest.TestSuite()
@@ -16,6 +17,7 @@ def suite():
     suite.addTests(unittest.TestLoader().loadTestsFromModule(test_processamento_resultados))
     suite.addTests(unittest.TestLoader().loadTestsFromModule(test_time))
     suite.addTests(unittest.TestLoader().loadTestsFromModule(test_integracao_campeonato))
+    suite.addTests(unittest.TestLoader().loadTestsFromModule(test_refatoracao_processador))
 
     return suite
 
